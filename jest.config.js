@@ -1,5 +1,5 @@
 module.exports = {
-  preset: 'ts-jest',
+  preset: 'react-native',
   collectCoverage: true,
   coverageThreshold: {
     global: {
