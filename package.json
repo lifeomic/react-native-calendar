@@ -7,7 +7,7 @@
   "author": "LifeOmic <development@lifeomic.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint src",
     "test": "jest",
     "build": "node build.js"
   },
