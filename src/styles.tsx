@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
-import { merge } from 'lodash';
+import merge from 'lodash/merge';
 
 export type CalendarColors = {
   outsideColumns: string;

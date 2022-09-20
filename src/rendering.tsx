@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { merge } from 'lodash';
+import merge from 'lodash/merge';
 import { CalendarEvent } from './Calendar';
 // TODO: remove this line when we migrate to external package
 // eslint-disable-next-line no-restricted-imports
