@@ -6,6 +6,9 @@
   "repository": "git@github.com:lifeomic/react-native-calendar.git",
   "author": "LifeOmic <development@lifeomic.com>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "lint": "eslint src",
     "test": "jest",
