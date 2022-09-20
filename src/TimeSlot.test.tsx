@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import '@testing-library/jest-native/extend-expect';
 import { fireEvent, render } from '@testing-library/react-native';
-import dayjs from 'dayjs';
+import dayjs = require('dayjs');
 import { TimeSlot } from './TimeSlot';
 
 const baseTime = {

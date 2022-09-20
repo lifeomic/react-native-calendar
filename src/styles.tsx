@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import merge from 'lodash/merge';
+import merge = require('lodash/merge');
 
 export type CalendarColors = {
   /**
@@ -62,7 +62,7 @@ export const CalendarStylesProvider: React.FC<CalendarStylesProviderProps> = ({
   colors = {},
   spacing,
 }) => {
-  const value = useMemo(
+  const value = React.useMemo(
     () => ({
       colors: merge(DEFAULT_COLORS, colors),
       spacing: spacing ?? DEFAULT_SPACING,
@@ -81,7 +81,7 @@ export const CalendarStylesProvider: React.FC<CalendarStylesProviderProps> = ({
 export const useCalendarStyles = () => {
   const { colors, spacing } = React.useContext(CalendarStylesContext);
 
-  return useMemo(
+  return React.useMemo(
     () => {
       // eslint-disable-next-line no-restricted-properties
       return StyleSheet.create({

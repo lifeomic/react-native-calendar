@@ -1,10 +1,10 @@
-import React, { useMemo } from 'react';
-import merge from 'lodash/merge';
+import * as React from 'react';
+import merge = require('lodash/merge');
 import { CalendarEvent } from './Calendar';
 // TODO: remove this line when we migrate to external package
 // eslint-disable-next-line no-restricted-imports
 import { Text } from 'react-native';
-import dayjs from 'dayjs';
+import dayjs = require('dayjs');
 import { useCalendarStyles } from './styles';
 
 export type CalendarRenderers = {
@@ -75,7 +75,7 @@ export type CalendarRenderersProviderProps = {
 export const CalendarRenderersProvider: React.FC<
   CalendarRenderersProviderProps
 > = ({ children, renderers }) => {
-  const value = useMemo(
+  const value = React.useMemo(
     () => merge(DEFAULT_RENDERERS, renderers),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [...Object.values(renderers ?? {})]
