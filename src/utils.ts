@@ -44,10 +44,10 @@ export const useEventData = (data: UseEventData) => {
         newEventData.push({
           date,
           events: events.filter((event) =>
-            dayjs(event.startDate).isBetween(startOfDay, endOfDay, 'day', '[]'),
+            dayjs(event.startDate).isBetween(startOfDay, endOfDay, 'day', '[]')
           ),
           unavailableTimeSlots: unavailableTimeSlots?.filter((timeSlot) =>
-            date.isBetween(timeSlot.startDate, timeSlot.endDate, 'day', '[]'),
+            date.isBetween(timeSlot.startDate, timeSlot.endDate, 'day', '[]')
           ),
         });
       }
@@ -55,7 +55,7 @@ export const useEventData = (data: UseEventData) => {
     },
     // eventStartDateString is being used for eventStartDate
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [events, eventStartDateString, numDays, unavailableTimeSlots],
+    [events, eventStartDateString, numDays, unavailableTimeSlots]
   );
 
   return eventData;
@@ -102,7 +102,7 @@ export const useTimesList = (props: UseTimesList) => {
       newTimes.push({
         date: StartOfDate,
         disabled: unavailableTimeSlots?.some((timeSlot) =>
-          time.isBetween(timeSlot.startDate, timeSlot.endDate, 'minute', '[)'),
+          time.isBetween(timeSlot.startDate, timeSlot.endDate, 'minute', '[)')
         ),
         height,
         // 'Noon' instead of 12 PM

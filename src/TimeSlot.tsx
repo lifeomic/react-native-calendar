@@ -28,7 +28,7 @@ export const TimeSlot: React.FC<TimeSlotProps> = (props) => {
                 const [hour, minute] = timeString
                   .split(':')
                   .map((hourOrMinuteString) =>
-                    parseInt(hourOrMinuteString, 10),
+                    parseInt(hourOrMinuteString, 10)
                   );
                 const base24Hour = (hour % 12) + (meridiem === 'PM' ? 12 : 0);
                 const date = time.date.hour(base24Hour).minute(minute);
