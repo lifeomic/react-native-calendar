@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs = require('dayjs');
 import { renderHook, waitFor } from '@testing-library/react-native';
 import {
   UseEventData,

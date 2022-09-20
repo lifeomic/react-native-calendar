@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import * as React from 'react';
 import { GestureResponderEvent, ScrollView, View } from 'react-native';
 
 import { DayList } from './DayList';
@@ -81,8 +81,8 @@ const Calendar: React.FC<CalendarProps> = (props) => {
     startHour = 8,
     unavailableTimeSlots,
   } = props;
-  const scrollViewRef = useRef<ScrollView>(null);
-  const [hourHeight, setHourHeight] = useState(0);
+  const scrollViewRef = React.useRef<ScrollView>(null);
+  const [hourHeight, setHourHeight] = React.useState(0);
 
   const eventData = useEventData({
     events,
