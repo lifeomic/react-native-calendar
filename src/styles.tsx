@@ -29,9 +29,9 @@ export type CalendarColors = {
 const DEFAULT_COLORS: CalendarColors = {
   disabledCalendarBackground: 'lightgray',
   enabledCalendarBackground: 'white',
-  outsideColumns: 'gray',
-  event: 'blue',
-  separator: 'lightgray',
+  outsideColumns: 'white',
+  event: 'lightblue',
+  separator: 'gray',
 };
 
 const DEFAULT_SPACING = (unit: number) => unit * 8;
