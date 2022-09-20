@@ -1716,6 +1716,17 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@testing-library/jest-native@^4.0.12":
+  version "4.0.12"
+  resolved "https://registry.yarnpkg.com/@testing-library/jest-native/-/jest-native-4.0.12.tgz#9669a2456bf8f7ac907fca879d157fd0f29e6cb8"
+  integrity sha512-SjH3mLpYPLt14F2av98172nbGHrOlThKWxbSQrc9ZOsgl8mlMvWkQnFEheQooiLpZwrkoi+P48+dDMU7VaRR3A==
+  dependencies:
+    chalk "^4.1.2"
+    jest-diff "^29.0.1"
+    jest-matcher-utils "^29.0.1"
+    pretty-format "^29.0.1"
+    redent "^3.0.0"
+
 "@testing-library/react-native@^11.1.0":
   version "11.1.0"
   resolved "https://registry.yarnpkg.com/@testing-library/react-native/-/react-native-11.1.0.tgz#50aaa9c026e4beb02c07607fb0db5f4478cdd625"
@@ -4658,7 +4669,7 @@ jest-config@^29.0.3:
     slash "^3.0.0"
     strip-json-comments "^3.1.1"
 
-jest-diff@^29.0.3:
+jest-diff@^29.0.1, jest-diff@^29.0.3:
   version "29.0.3"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-29.0.3.tgz#41cc02409ad1458ae1bf7684129a3da2856341ac"
   integrity sha512-+X/AIF5G/vX9fWK+Db9bi9BQas7M9oBME7egU7psbn4jlszLFCu0dW63UgeE6cs/GANq4fLaT+8sGHQQ0eCUfg==
@@ -4755,7 +4766,7 @@ jest-leak-detector@^29.0.3:
     jest-get-type "^29.0.0"
     pretty-format "^29.0.3"
 
-jest-matcher-utils@^29.0.3:
+jest-matcher-utils@^29.0.1, jest-matcher-utils@^29.0.3:
   version "29.0.3"
   resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-29.0.3.tgz#b8305fd3f9e27cdbc210b21fc7dbba92d4e54560"
   integrity sha512-RsR1+cZ6p1hDV4GSCQTg+9qjeotQCgkaleIKLK7dm+U4V/H2bWedU3RAtLm8+mANzZ7eDV33dMar4pejd7047w==
@@ -6819,7 +6830,7 @@ pretty-format@^26.5.2, pretty-format@^26.6.2:
     ansi-styles "^4.0.0"
     react-is "^17.0.1"
 
-pretty-format@^29.0.0, pretty-format@^29.0.3:
+pretty-format@^29.0.0, pretty-format@^29.0.1, pretty-format@^29.0.3:
   version "29.0.3"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-29.0.3.tgz#23d5f8cabc9cbf209a77d49409d093d61166a811"
   integrity sha512-cHudsvQr1K5vNVLbvYF/nv3Qy/F/BcEKxGuIeMiVMRHxPOO1RxXooP8g/ZrwAp7Dx+KdMZoOc7NxLHhMrP2f9Q==

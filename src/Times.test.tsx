@@ -1,8 +1,6 @@
 import React from 'react';
-
+import { render } from '@testing-library/react-native';
 import { Times } from './Times';
-
-import { render } from '../../../test/app-render';
 
 describe('Times', () => {
   it('renders Times with the correct time slot', () => {

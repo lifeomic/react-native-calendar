@@ -1,13 +1,11 @@
 import dayjs from 'dayjs';
-
+import { renderHook, waitFor } from '@testing-library/react-native';
 import {
   UseEventData,
   useEventData,
   UseTimesList,
   useTimesList,
 } from './utils';
-
-import { renderHook } from '../../../test/hook-render';
 
 describe('useEventData', () => {
   const defaultEventProps = {
@@ -30,9 +28,7 @@ describe('useEventData', () => {
   };
 
   it('works for 1 day', async () => {
-    const { result, waitFor } = renderHook(() =>
-      useEventData({ ...defaultEventProps }),
-    );
+    const { result } = renderHook(() => useEventData({ ...defaultEventProps }));
 
     await waitFor(() => result.current.length > 0);
 
@@ -43,8 +39,8 @@ describe('useEventData', () => {
   });
 
   it('works for 7 day', async () => {
-    const { result, waitFor } = renderHook(() =>
-      useEventData({ ...defaultEventProps, numDays: 7 }),
+    const { result } = renderHook(() =>
+      useEventData({ ...defaultEventProps, numDays: 7 })
     );
 
     await waitFor(() => result.current.length > 0);
@@ -55,7 +51,7 @@ describe('useEventData', () => {
     for (let index = 0; index < 7; index++) {
       expect(result.current[index].events.length).toBe(index === 3 ? 1 : 0);
       expect(result.current[index].unavailableTimeSlots?.length).toBe(
-        index === 3 ? 1 : 0,
+        index === 3 ? 1 : 0
       );
     }
   });
@@ -76,9 +72,7 @@ describe('useTimesList', () => {
   };
 
   it('works', async () => {
-    const { result, waitFor } = renderHook(() =>
-      useTimesList({ ...defaultTimesProps }),
-    );
+    const { result } = renderHook(() => useTimesList({ ...defaultTimesProps }));
 
     await waitFor(() => result.current.length > 0);
 

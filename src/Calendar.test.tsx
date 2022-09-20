@@ -1,9 +1,6 @@
 import React from 'react';
-import { fireEvent } from '@testing-library/react-native';
-
+import { fireEvent, render } from '@testing-library/react-native';
 import { Calendar } from './Calendar';
-
-import { render } from '../../../test/app-render';
 
 const eventData = [
   {
@@ -34,7 +31,7 @@ describe('Calendar', () => {
         onEventPress={onEventPressMock}
         startDate={startDate}
         unavailableTimeSlots={unavailableTimeSlots}
-      />,
+      />
     );
 
     expect(view.queryByTestId('calendar')).toBeTruthy();

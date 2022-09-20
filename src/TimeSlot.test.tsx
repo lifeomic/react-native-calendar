@@ -1,10 +1,8 @@
 import React from 'react';
-import { fireEvent } from '@testing-library/react-native';
+import '@testing-library/jest-native/extend-expect';
+import { fireEvent, render } from '@testing-library/react-native';
 import dayjs from 'dayjs';
-
 import { TimeSlot } from './TimeSlot';
-
-import { render } from '../../../test/app-render';
 
 const baseTime = {
   date: dayjs().startOf('day'),
@@ -27,7 +25,7 @@ describe('TimeSlot', () => {
       <TimeSlot
         onGridPress={onGridPressMock}
         time={{ ...baseTime, disabled: true, time: '11:45 AM' }}
-      />,
+      />
     );
 
     expect(view.queryByTestId('time slot')).toBeTruthy();
@@ -44,7 +42,7 @@ describe('TimeSlot', () => {
       <TimeSlot
         onGridPress={onGridPressMock}
         time={{ ...baseTime, time: '11:45 AM' }}
-      />,
+      />
     );
 
     expect(view.queryByTestId('time slot')).toBeTruthy();
@@ -53,7 +51,7 @@ describe('TimeSlot', () => {
 
     expect(onGridPressMock).toHaveBeenCalledWith(
       undefined,
-      dayjs().startOf('day').hour(11).minute(45).toDate(),
+      dayjs().startOf('day').hour(11).minute(45).toDate()
     );
   });
 
@@ -63,7 +61,7 @@ describe('TimeSlot', () => {
       <TimeSlot
         onGridPress={onGridPressMock}
         time={{ ...baseTime, time: 'Noon' }}
-      />,
+      />
     );
 
     expect(view.queryByTestId('time slot')).toBeTruthy();
@@ -72,7 +70,7 @@ describe('TimeSlot', () => {
 
     expect(onGridPressMock).toHaveBeenCalledWith(
       undefined,
-      dayjs().startOf('day').hour(12).toDate(),
+      dayjs().startOf('day').hour(12).toDate()
     );
   });
 
@@ -82,7 +80,7 @@ describe('TimeSlot', () => {
       <TimeSlot
         onGridPress={onGridPressMock}
         time={{ ...baseTime, time: '3:15 PM' }}
-      />,
+      />
     );
 
     expect(view.queryByTestId('time slot')).toBeTruthy();
@@ -91,7 +89,7 @@ describe('TimeSlot', () => {
 
     expect(onGridPressMock).toHaveBeenCalledWith(
       undefined,
-      dayjs().startOf('day').hour(15).minute(15).toDate(),
+      dayjs().startOf('day').hour(15).minute(15).toDate()
     );
   });
 });
