@@ -6,7 +6,7 @@
     "module": "commonjs",
     "lib": ["ES2020"],
     "outDir": "./dist",
-    "jsx": "react-native",
+    "jsx": "react",
     "inlineSources": false,
     "inlineSourceMap": false,
     "esModuleInterop": false,
