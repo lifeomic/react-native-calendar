@@ -27,7 +27,22 @@ export type CalendarRenderers = {
 };
 
 export type CalendarRenderersProps = {
-  /** Rendering overrides to use within the calendar. */
+  /**
+   * Rendering overrides to use within the calendar.
+   *
+   * **IMPORTANT**: These rendering functions should be referentially
+   * stable, ideally by being statically defined. e.g.
+   *
+   * @example
+   *
+   * const renderEventContent = () => <>{...}</>
+   *
+   * const MyComponent = () => {
+   *   <Calendar
+   *     renderers={{ eventContent: renderEventContent }}
+   *   />
+   * }
+   */
   renderers?: CalendarRenderers;
 };
 

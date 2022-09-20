@@ -3,9 +3,21 @@ import { StyleSheet } from 'react-native';
 import merge from 'lodash/merge';
 
 export type CalendarColors = {
+  /**
+   * The background color of the left and right outside columns of the calendar.
+   */
   outsideColumns: string;
+  /**
+   * The background color of calendar sections that are disabled.
+   */
   disabledCalendarBackground: string;
+  /**
+   * The background color of calendar sections that are not disabled.
+   */
   enabledCalendarBackground: string;
+  /**
+   * The color of the separator line in the calendar.
+   */
   separator: string;
   /**
    * A default color for events. This can be overriden per-event
