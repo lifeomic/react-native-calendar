@@ -17,4 +17,8 @@ for (const file of glob.sync('dist/**/*.test.*')) {
   unlinkSync(file);
 }
 
+run('yarn babel dist --out-dir dist');
+
+run('yarn prettier --write dist');
+
 console.log('✔️  Successfully built library to dist folder');
