@@ -63,6 +63,7 @@ export const DayList: React.FC<DayListProps> = (props) => {
           const eventStartDay = dayjs(event.startDate);
           const eventEndDay = dayjs(event.endDate);
           const startHour = eventStartDay.hour();
+          const startMinute = eventStartDay.minute();
           const difference = eventEndDay.diff(eventStartDay, 'minute');
 
           return (
@@ -73,7 +74,16 @@ export const DayList: React.FC<DayListProps> = (props) => {
                 styles.event,
                 {
                   height: (difference / 15) * (hourHeight / 4),
-                  top: startHour * hourHeight + startHour,
+                  /**
+                   * startHour + 1 * hourHeight = the beginning of the hour location for the event start
+                   *
+                   * startMinute / 15 => :00 = 0, :15 = 1, :30 = 2, :45 = 3
+                   * hourHeight / 4 => size of the 15 minute interval segments
+                   * combine them together to get the start position of the event within the hour based on minutes
+                   */
+                  top:
+                    (startHour + 1) * hourHeight +
+                    (startMinute / 15) * (hourHeight / 4),
                 },
               ]}
             >
