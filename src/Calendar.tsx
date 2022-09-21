@@ -125,7 +125,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
        */
       y: hourHeight * (startHour - 1) + 10 + startHour,
     });
-  }, []);
+  }, [scrollViewRef.current]);
 
   return (
     <ScrollView
