@@ -103,7 +103,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   return (
     <ScrollView
       bounces={false}
-      contentContainerStyle={[styles.container, style]}
+      contentContainerStyle={styles.container}
       onLayout={(event) => {
         const itemHeight = event.nativeEvent.layout.height / 11;
         const roundedUpHeight = Math.ceil(itemHeight / 10) * 10;
@@ -114,7 +114,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
       }}
       ref={scrollViewRef}
       showsVerticalScrollIndicator={false}
-      style={styles.flex}
+      style={[styles.flex, style]}
       testID="calendar"
     >
       <Times />
