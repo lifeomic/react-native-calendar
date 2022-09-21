@@ -77,7 +77,7 @@ export const DayList: React.FC<DayListProps> = (props) => {
                   /**
                    * startHour * (hourHeight + 1)
                    * each hour has a fixed height and each Separator has a height
-                   * of 1 which adds up based on the start time hour add together
+                   * of 1 which adds up based on the start time hour. add together
                    * to get the start location of the hour mark
                    *
                    * startMinute / 15 => :00 = 0, :15 = 1, :30 = 2, :45 = 3
