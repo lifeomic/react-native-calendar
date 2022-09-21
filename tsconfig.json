@@ -10,7 +10,6 @@
     "inlineSources": false,
     "inlineSourceMap": false,
     "esModuleInterop": false,
-    "allowSyntheticDefaultImports": false,
     "declaration": true,
     "skipLibCheck": true
   }

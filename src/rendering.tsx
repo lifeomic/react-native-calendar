@@ -1,10 +1,10 @@
-import * as React from 'react';
-import merge = require('lodash/merge');
+import React from 'react';
+import merge from 'lodash/merge';
 import { CalendarEvent } from './Calendar';
 // TODO: remove this line when we migrate to external package
 // eslint-disable-next-line no-restricted-imports
 import { Text } from 'react-native';
-import dayjs = require('dayjs');
+import dayjs from 'dayjs';
 import { useCalendarStyles } from './styles';
 
 export type CalendarRenderers = {

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Pressable } from 'react-native';
 
 import type { CalendarProps } from './Calendar';
