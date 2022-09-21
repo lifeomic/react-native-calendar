@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { GestureResponderEvent, ScrollView, View } from 'react-native';
 
 import { DayList } from './DayList';

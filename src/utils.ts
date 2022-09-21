@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import dayjs = require('dayjs');
-import isBetween = require('dayjs/plugin/isBetween');
-import weekday = require('dayjs/plugin/weekday');
+import dayjs from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween';
+import weekday from 'dayjs/plugin/weekday';
 
 import type { CalendarProps, TimeSlot } from './Calendar';
 

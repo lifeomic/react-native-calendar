@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
-import merge = require('lodash/merge');
+import merge from 'lodash/merge';
 
 export type CalendarColors = {
   /**

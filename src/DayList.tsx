@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
-import dayjs = require('dayjs');
+import dayjs from 'dayjs';
 
 import type { CalendarProps } from './Calendar';
 import { Separator } from './Separator';
