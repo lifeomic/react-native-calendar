@@ -69,6 +69,7 @@ export const DayList: React.FC<DayListProps> = (props) => {
           return (
             <Pressable
               key={`${event.id}-${index}`}
+              testID={`calendar-event-${event.id}`}
               onPress={() => onEventPress?.(event)}
               style={[
                 styles.event,
