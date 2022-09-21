@@ -1,5 +1,6 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent, render, waitFor } from '@testing-library/react-native';
+import '@testing-library/jest-native/extend-expect';
 import { Calendar } from './Calendar';
 
 const eventData = [
@@ -42,5 +43,32 @@ describe('Calendar', () => {
     expect(onEventPressMock).not.toHaveBeenCalled();
     fireEvent.press(view.getByText(eventData[0].title));
     expect(onEventPressMock).toHaveBeenCalledWith(eventData[0]);
+  });
+
+  it('renders event.color correctly', async () => {
+    const screen = render(
+      <Calendar
+        numDays={1}
+        startDate={startDate}
+        events={[
+          {
+            id: 'id-2',
+            startDate: new Date(2022, 8, 7, 13, 0),
+            endDate: new Date(2022, 8, 7, 13, 30),
+            title: 'Custom Color Event',
+            color: 'green',
+          },
+        ]}
+      />
+    );
+
+    fireEvent(screen.getByTestId('calendar'), 'layout', {
+      nativeEvent: { layout: { height: 500, width: 500 } },
+    });
+
+    const event = await waitFor(() =>
+      screen.getByTestId('calendar-event-id-2')
+    );
+    expect(event).toHaveStyle({ backgroundColor: 'green' });
   });
 });
