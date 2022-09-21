@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { GestureResponderEvent, ScrollView, View } from 'react-native';
+import {
+  GestureResponderEvent,
+  ScrollView,
+  StyleProp,
+  View,
+  ViewStyle,
+} from 'react-native';
 
 import { DayList } from './DayList';
 import { Times } from './Times';
@@ -64,6 +70,12 @@ export type CalendarProps = {
    */
   startHour?: number;
   /**
+   * Style Prop for the Calendar ScrollView. If the Calendar does not have a
+   * parent container with a fixed height, use this prop to ensure that the
+   * Calendar does not inflate outside of the useable view
+   */
+  style?: StyleProp<ViewStyle>;
+  /**
    * Time slots to mark as "disabled".
    */
   unavailableTimeSlots?: TimeSlot[];
@@ -77,6 +89,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
     onGridPress,
     startDate,
     startHour = 8,
+    style,
     unavailableTimeSlots,
   } = props;
   const scrollViewRef = React.useRef<ScrollView>(null);
@@ -121,7 +134,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
       }}
       ref={scrollViewRef}
       showsVerticalScrollIndicator={false}
-      style={styles.flex}
+      style={style}
       testID="calendar"
     >
       <Times hourHeight={hourHeight} />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Platform, StyleSheet, View } from 'react-native';
+import { Alert, Platform, StyleSheet } from 'react-native';
 import {
   SafeAreaProvider,
   initialWindowMetrics,
@@ -40,6 +40,10 @@ const unavailableTimeSlots = [
 
 const startDate = new Date(2022, 8, 7);
 
+const onEventPress = (event: CalendarEvent) => {
+  showAlert(`You pressed event with id: ${event.id}`);
+};
+
 const InteractiveCalendar = () => {
   const { height } = useSafeAreaFrame();
   const { top, bottom } = useSafeAreaInsets();
@@ -60,33 +64,28 @@ const InteractiveCalendar = () => {
   ]);
 
   return (
-    <View
+    <Calendar
+      events={moreEvents}
+      onGridPress={(_event, date) => {
+        setEvents((events) => [
+          ...events,
+          {
+            id: `id-${events.length + 1}`,
+            startDate: date,
+            endDate: dayjs(date).add(30, 'minutes').toDate(),
+            title: `Event ${events.length + 1}`,
+          },
+        ]);
+      }}
+      onEventPress={onEventPress}
+      numDays={1}
+      startDate={startDate}
       style={[
         styles.container,
-        { height, paddingTop: top, paddingBottom: bottom },
+        { height, marginTop: top, marginBottom: bottom },
       ]}
-    >
-      <Calendar
-        events={moreEvents}
-        onGridPress={(_event, date) => {
-          setEvents((events) => [
-            ...events,
-            {
-              id: `id-${events.length + 1}`,
-              startDate: date,
-              endDate: dayjs(date).add(30, 'minutes').toDate(),
-              title: `Event ${events.length + 1}`,
-            },
-          ]);
-        }}
-        onEventPress={(event) => {
-          showAlert(`You pressed event with id: ${event.id}`);
-        }}
-        numDays={1}
-        startDate={startDate}
-        unavailableTimeSlots={unavailableTimeSlots}
-      />
-    </View>
+      unavailableTimeSlots={unavailableTimeSlots}
+    />
   );
 };
 
