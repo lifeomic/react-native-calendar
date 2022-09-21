@@ -3,7 +3,7 @@ import { Pressable } from 'react-native';
 
 import type { CalendarProps } from './Calendar';
 import { useCalendarStyles } from './styles';
-import type { TimeSlotItem } from './utils';
+import { CALENDAR_HOUR_HEIGHT, TimeSlotItem } from './utils';
 
 type TimeSlotProps = Pick<CalendarProps, 'onGridPress'> & {
   time: TimeSlotItem;
@@ -39,7 +39,7 @@ export const TimeSlot: React.FC<TimeSlotProps> = (props) => {
         : {})}
       style={[
         time.disabled ? styles.disabled : styles.enabled,
-        { height: time.height },
+        { height: CALENDAR_HOUR_HEIGHT / 4 },
       ]}
       testID="time slot"
     />

@@ -4,7 +4,7 @@ import { Times } from './Times';
 
 describe('Times', () => {
   it('renders Times with the correct time slot', () => {
-    const view = render(<Times hourHeight={10} />);
+    const view = render(<Times />);
 
     expect(view.queryByText('12 AM')).toBeFalsy();
     expect(view.queryByText('1 AM')).toBeTruthy();

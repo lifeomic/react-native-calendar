@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ViewStyle } from 'react-native';
 
-import { useTimesList } from './utils';
+import { CALENDAR_HOUR_HEIGHT, useTimesList } from './utils';
 
 import { useCalendarStyles } from './styles';
 import { useCalendarRenderers } from './rendering';
@@ -18,24 +18,22 @@ const Time: React.FC<TimeProps> = (props) => {
   );
 };
 
-export type TimesProps = {
-  hourHeight: number;
-};
-
-export const Times: React.FC<TimesProps> = (props) => {
-  const { hourHeight } = props;
+export const Times: React.FC = () => {
   const styles = useCalendarStyles();
 
   const times = useTimesList({
     formatTimeLabel: 'h A',
-    height: hourHeight + 1,
     minutesStep: 60,
   });
 
   return (
     <View style={styles.columnSmall}>
-      {times.map(({ height, time }, index) => (
-        <Time key={`${time}-${index}`} style={{ height }} time={time} />
+      {times.map(({ time }, index) => (
+        <Time
+          key={`${time}-${index}`}
+          style={{ height: CALENDAR_HOUR_HEIGHT }}
+          time={time}
+        />
       ))}
     </View>
   );

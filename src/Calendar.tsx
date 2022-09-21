@@ -1,5 +1,11 @@
 import React from 'react';
-import { GestureResponderEvent, ScrollView, View } from 'react-native';
+import {
+  GestureResponderEvent,
+  ScrollView,
+  StyleProp,
+  View,
+  ViewStyle,
+} from 'react-native';
 
 import { DayList } from './DayList';
 import { Times } from './Times';
@@ -31,6 +37,7 @@ export type CalendarStylesProps = {
 };
 
 export type CalendarProps = {
+  style?: StyleProp<ViewStyle>;
   /**
    * The list of events to render on the calendar.
    */
@@ -73,6 +80,7 @@ export type CalendarProps = {
 
 const Calendar: React.FC<CalendarProps> = (props) => {
   const {
+    style,
     events,
     numDays,
     onEventPress,
@@ -82,7 +90,6 @@ const Calendar: React.FC<CalendarProps> = (props) => {
     unavailableTimeSlots,
   } = props;
   const scrollViewRef = React.useRef<ScrollView>(null);
-  const [hourHeight, setHourHeight] = React.useState(0);
 
   const eventData = useEventData({
     events,
@@ -96,7 +103,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   return (
     <ScrollView
       bounces={false}
-      contentContainerStyle={styles.container}
+      contentContainerStyle={[styles.container, style]}
       onLayout={(event) => {
         const itemHeight = event.nativeEvent.layout.height / 11;
         const roundedUpHeight = Math.ceil(itemHeight / 10) * 10;
@@ -104,20 +111,18 @@ const Calendar: React.FC<CalendarProps> = (props) => {
           animated: false,
           y: roundedUpHeight * (startHour - 0.75),
         });
-        setHourHeight(roundedUpHeight);
       }}
       ref={scrollViewRef}
       showsVerticalScrollIndicator={false}
       style={styles.flex}
       testID="calendar"
     >
-      <Times hourHeight={hourHeight} />
+      <Times />
       <View style={styles.columnBig}>
         {eventData.map((data) => (
           <DayList
             date={data.date}
             events={data.events}
-            hourHeight={hourHeight}
             key={data.date.valueOf()}
             onEventPress={onEventPress}
             onGridPress={onGridPress}

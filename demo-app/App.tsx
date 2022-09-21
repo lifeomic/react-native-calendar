@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Dimensions, SafeAreaView, StyleSheet, View } from 'react-native';
 import dayjs from 'dayjs';
 import { Calendar } from '../src/Calendar';
 
@@ -46,6 +46,11 @@ const InteractiveCalendar = () => {
 
   return (
     <Calendar
+      style={{
+        margin: 15,
+        borderColor: 'blue',
+        borderWidth: 1,
+      }}
       events={moreEvents}
       onGridPress={(e, date) => {
         setEvents((events) => [
@@ -70,17 +75,18 @@ const InteractiveCalendar = () => {
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <InteractiveCalendar />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    margin: 15,
+    height: 600,
+    width: 350,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

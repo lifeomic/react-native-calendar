@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import type { CalendarProps } from './Calendar';
 import { Separator } from './Separator';
 import { TimeSlot } from './TimeSlot';
-import { useTimesList } from './utils';
+import { CALENDAR_HOUR_HEIGHT, useTimesList } from './utils';
 
 import { useCalendarStyles } from './styles';
 import { useCalendarRenderers } from './rendering';
@@ -15,32 +15,20 @@ type DayListProps = Pick<
   'events' | 'onEventPress' | 'onGridPress' | 'unavailableTimeSlots'
 > & {
   date: dayjs.Dayjs;
-  hourHeight: number;
 };
 
 export const DayList: React.FC<DayListProps> = (props) => {
-  const {
-    events,
-    date,
-    hourHeight,
-    onEventPress,
-    onGridPress,
-    unavailableTimeSlots,
-  } = props;
+  const { events, date, onEventPress, onGridPress, unavailableTimeSlots } =
+    props;
   const styles = useCalendarStyles();
   const times = useTimesList({
     date,
     formatTimeLabel: 'h:mm A',
-    height: hourHeight / 4,
     minutesStep: 15,
     unavailableTimeSlots,
   });
 
   const renderers = useCalendarRenderers();
-
-  if (!hourHeight) {
-    return null;
-  }
 
   return (
     <View style={styles.flex}>
@@ -73,7 +61,7 @@ export const DayList: React.FC<DayListProps> = (props) => {
               style={[
                 styles.event,
                 {
-                  height: (difference / 15) * (hourHeight / 4),
+                  height: (difference / 15) * (CALENDAR_HOUR_HEIGHT / 4),
                   /**
                    * startHour + 1 * hourHeight = the beginning of the hour location for the event start
                    *
@@ -82,8 +70,8 @@ export const DayList: React.FC<DayListProps> = (props) => {
                    * combine them together to get the start position of the event within the hour based on minutes
                    */
                   top:
-                    (startHour + 1) * hourHeight +
-                    (startMinute / 15) * (hourHeight / 4),
+                    (startHour + 1) * CALENDAR_HOUR_HEIGHT +
+                    (startMinute / 15) * (CALENDAR_HOUR_HEIGHT / 4),
                 },
               ]}
             >

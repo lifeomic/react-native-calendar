@@ -64,7 +64,6 @@ export const useEventData = (data: UseEventData) => {
 export type UseTimesList = {
   date?: dayjs.Dayjs;
   formatTimeLabel: string;
-  height: number;
   /**
    * we support 15 minute intervals within the calendar as
    * events can start/end on intervals :00 :15 :30 :45
@@ -79,7 +78,6 @@ export type UseTimesList = {
 export type TimeSlotItem = {
   date: dayjs.Dayjs;
   disabled?: boolean;
-  height: number;
   time: string;
 };
 
@@ -88,8 +86,7 @@ export type TimeSlotItem = {
  * the enabled/disabled display of those time slots
  */
 export const useTimesList = (props: UseTimesList) => {
-  const { date, formatTimeLabel, height, minutesStep, unavailableTimeSlots } =
-    props;
+  const { date, formatTimeLabel, minutesStep, unavailableTimeSlots } = props;
 
   const StartOfDate = dayjs(date).startOf('day');
   const startOfDateString = StartOfDate.valueOf();
@@ -104,7 +101,6 @@ export const useTimesList = (props: UseTimesList) => {
         disabled: unavailableTimeSlots?.some((timeSlot) =>
           time.isBetween(timeSlot.startDate, timeSlot.endDate, 'minute', '[)')
         ),
-        height,
         // 'Noon' instead of 12 PM
         time:
           timer === MINUTES_IN_DAY / 2
@@ -116,13 +112,9 @@ export const useTimesList = (props: UseTimesList) => {
     return newTimes;
     // stringDate is being used for StartOfDate
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    formatTimeLabel,
-    height,
-    minutesStep,
-    startOfDateString,
-    unavailableTimeSlots,
-  ]);
+  }, [formatTimeLabel, minutesStep, startOfDateString, unavailableTimeSlots]);
 
   return times;
 };
+
+export const CALENDAR_HOUR_HEIGHT = 60;

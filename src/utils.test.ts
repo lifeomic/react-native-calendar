@@ -79,11 +79,9 @@ describe('useTimesList', () => {
     expect(result.current.length).toBe(24);
     expect(result.current[0].date.isSame('2022-09-07')).toBe(true);
     expect(result.current[0].disabled).toBe(false);
-    expect(result.current[0].height).toBe(10);
     expect(result.current[0].time).toBe('12 AM');
     expect(result.current[23].date.isSame('2022-09-07')).toBe(true);
     expect(result.current[23].disabled).toBe(false);
-    expect(result.current[23].height).toBe(10);
     expect(result.current[23].time).toBe('11 PM');
   });
 });
