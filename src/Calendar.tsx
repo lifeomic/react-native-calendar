@@ -58,7 +58,7 @@ export type CalendarProps = {
   /**
    * The start date from which to begin the calendar.
    *
-   * In multi-day mode, this specifies the first day that will be displayed.
+   * In multi-day mode, this specifies the week that will be displayed.
    *
    * In single-day mode, this specifies the day that will be shown.
    */
@@ -69,6 +69,10 @@ export type CalendarProps = {
    * Default value: 8 (8 am)
    */
   startHour?: number;
+  /**
+   * The height of the "hour" sections in the day view.
+   */
+  hourHeight?: number;
   /**
    * Style Prop for the Calendar ScrollView. If the Calendar does not have a
    * parent container with a fixed height, use this prop to ensure that the
@@ -89,11 +93,11 @@ const Calendar: React.FC<CalendarProps> = (props) => {
     onGridPress,
     startDate,
     startHour = 8,
+    hourHeight = 60,
     style,
     unavailableTimeSlots,
   } = props;
   const scrollViewRef = React.useRef<ScrollView>(null);
-  const [hourHeight, setHourHeight] = React.useState(0);
 
   const eventData = useEventData({
     events,
@@ -121,17 +125,12 @@ const Calendar: React.FC<CalendarProps> = (props) => {
        */
       y: hourHeight * (startHour - 1) + 10 + startHour,
     });
-  }, [hourHeight, startHour]);
+  }, []);
 
   return (
     <ScrollView
       bounces={false}
       contentContainerStyle={styles.container}
-      onLayout={(event) => {
-        const itemHeight = event.nativeEvent.layout.height / 11;
-        const roundedUpHeight = Math.ceil(itemHeight / 10) * 10;
-        setHourHeight(roundedUpHeight);
-      }}
       ref={scrollViewRef}
       showsVerticalScrollIndicator={false}
       style={style}

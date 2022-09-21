@@ -38,10 +38,6 @@ export const DayList: React.FC<DayListProps> = (props) => {
 
   const renderers = useCalendarRenderers();
 
-  if (!hourHeight) {
-    return null;
-  }
-
   return (
     <View style={styles.flex}>
       {times.map((time, index) => {

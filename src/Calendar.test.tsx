@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, waitFor } from '@testing-library/react-native';
+import { fireEvent, render } from '@testing-library/react-native';
 import '@testing-library/jest-native/extend-expect';
 import { Calendar } from './Calendar';
 
@@ -36,16 +36,29 @@ describe('Calendar', () => {
     );
 
     expect(view.queryByTestId('calendar')).toBeTruthy();
-    fireEvent(view.getByTestId('calendar'), 'layout', {
-      nativeEvent: { layout: { height: 500, width: 500 } },
-    });
 
     expect(onEventPressMock).not.toHaveBeenCalled();
     fireEvent.press(view.getByText(eventData[0].title));
     expect(onEventPressMock).toHaveBeenCalledWith(eventData[0]);
   });
 
-  it('renders event.color correctly', async () => {
+  it('renders hours with correct height', () => {
+    const hourHeight = 123;
+    const screen = render(
+      <Calendar
+        numDays={1}
+        startDate={startDate}
+        events={[]}
+        hourHeight={hourHeight}
+      />
+    );
+
+    expect(screen.getByTestId('8:00 AM')).toHaveStyle({
+      height: hourHeight / 4,
+    });
+  });
+
+  it('renders event.color correctly', () => {
     const screen = render(
       <Calendar
         numDays={1}
@@ -62,13 +75,7 @@ describe('Calendar', () => {
       />
     );
 
-    fireEvent(screen.getByTestId('calendar'), 'layout', {
-      nativeEvent: { layout: { height: 500, width: 500 } },
-    });
-
-    const event = await waitFor(() =>
-      screen.getByTestId('calendar-event-id-2')
-    );
+    const event = screen.getByTestId('calendar-event-id-2');
     expect(event).toHaveStyle({ backgroundColor: 'green' });
   });
 });
