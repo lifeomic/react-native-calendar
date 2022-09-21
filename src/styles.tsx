@@ -34,11 +34,8 @@ const DEFAULT_COLORS: CalendarColors = {
   separator: 'gray',
 };
 
-const DEFAULT_SPACING = (unit: number) => unit * 8;
-
 type InternalCalendarStylesContextValue = {
   colors: CalendarColors;
-  spacing: (unit: number) => number;
 };
 
 /**
@@ -48,27 +45,21 @@ type InternalCalendarStylesContextValue = {
 const CalendarStylesContext =
   React.createContext<InternalCalendarStylesContextValue>({
     colors: DEFAULT_COLORS,
-    spacing: DEFAULT_SPACING,
   });
 
 export type CalendarStylesProviderProps = {
   children?: React.ReactNode;
   colors?: Partial<CalendarColors>;
-  spacing?: (unit: number) => number;
 };
 
 export const CalendarStylesProvider: React.FC<CalendarStylesProviderProps> = ({
   children,
   colors = {},
-  spacing,
 }) => {
   const value = React.useMemo(
-    () => ({
-      colors: merge(DEFAULT_COLORS, colors),
-      spacing: spacing ?? DEFAULT_SPACING,
-    }),
+    () => ({ colors: merge(DEFAULT_COLORS, colors) }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [...Object.values(colors), spacing]
+    [...Object.values(colors)]
   );
 
   return (
@@ -79,7 +70,7 @@ export const CalendarStylesProvider: React.FC<CalendarStylesProviderProps> = ({
 };
 
 export const useCalendarStyles = () => {
-  const { colors, spacing } = React.useContext(CalendarStylesContext);
+  const { colors } = React.useContext(CalendarStylesContext);
 
   return React.useMemo(
     () => {
@@ -110,7 +101,7 @@ export const useCalendarStyles = () => {
         },
         font: {
           marginTop: -6, // 1 from time height style and 5 from half the fontSize
-          paddingRight: spacing(2),
+          paddingRight: 10,
           textAlign: 'right',
         },
         flex: {
