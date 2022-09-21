@@ -101,8 +101,6 @@ export const useCalendarStyles = () => {
         },
         event: {
           backgroundColor: colors.event,
-          justifyContent: 'center',
-          paddingLeft: spacing(1),
           position: 'absolute',
           width: '100%',
         },
