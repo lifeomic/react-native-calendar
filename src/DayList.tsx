@@ -85,6 +85,7 @@ export const DayList: React.FC<DayListProps> = (props) => {
                     (startHour + 1) * hourHeight +
                     (startMinute / 15) * (hourHeight / 4),
                 },
+                event.color ? { backgroundColor: event.color } : undefined,
               ]}
             >
               {renderers.eventContent(event)}
