@@ -91,6 +91,14 @@ const Calendar: React.FC<CalendarProps> = (props) => {
 
   const styles = useCalendarStyles();
 
+  /**
+   * it's important that the scrollView scrollTo is called after the initial
+   * rendering of ScrollView instead of within the onLayout as the inner
+   * components will not be drawn and inflated at that time. So even tho the
+   * values we need will be present at that time, the scrollTo will be
+   * called and have no where to scroll so the scrollTo will result in the
+   * view staying at the top of the ScrollView
+   */
   useEffect(() => {
     scrollViewRef.current?.scrollTo({
       animated: false,
