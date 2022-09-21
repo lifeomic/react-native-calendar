@@ -26,8 +26,6 @@ export type CalendarEvent = TimeSlot & {
 export type CalendarStylesProps = {
   /** Color overrides to use within the calendar. */
   colors?: Partial<CalendarColors>;
-  /** A spacing function to use within the calendar. */
-  spacing?: (unit: number) => number;
 };
 
 export type CalendarProps = {
@@ -139,9 +137,9 @@ const Calendar: React.FC<CalendarProps> = (props) => {
 
 const WithContextProps: React.FC<
   CalendarProps & CalendarStylesProps & CalendarRenderersProps
-> = ({ colors, spacing, renderers, ...props }) => {
+> = ({ colors, renderers, ...props }) => {
   return (
-    <CalendarStylesProvider colors={colors} spacing={spacing}>
+    <CalendarStylesProvider colors={colors}>
       <CalendarRenderersProvider renderers={renderers}>
         <Calendar {...props} />
       </CalendarRenderersProvider>
