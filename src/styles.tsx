@@ -20,7 +20,7 @@ export type CalendarColors = {
    */
   separator: string;
   /**
-   * A default color for events. This can be overriden per-event
+   * A default color for events. This can be overridden per-event
    * in the CalendarEvent object.
    */
   event: string;
@@ -108,10 +108,11 @@ export const useCalendarStyles = () => {
         },
         separator: {
           backgroundColor: colors.separator,
-          height: StyleSheet.hairlineWidth,
+          height: 1,
         },
         font: {
-          marginTop: -6, // 1 from time height style and 5 from half the fontSize
+          fontSize: 10, // default fontSize so put it down just to be explicit
+          marginTop: -5.5, // half the time height style and 5 from half the fontSize
           paddingRight: spacing(2),
           textAlign: 'right',
         },

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GestureResponderEvent, ScrollView, View } from 'react-native';
 
 import { DayList } from './DayList';
@@ -93,6 +93,17 @@ const Calendar: React.FC<CalendarProps> = (props) => {
 
   const styles = useCalendarStyles();
 
+  useEffect(() => {
+    scrollViewRef.current?.scrollTo({
+      animated: false,
+      /**
+       * size of hours before start hour + fontSize + startHour
+       * for all the { height: 1 } separators
+       */
+      y: hourHeight * (startHour - 1) + 10 + startHour,
+    });
+  }, [hourHeight, startHour]);
+
   return (
     <ScrollView
       bounces={false}
@@ -100,10 +111,6 @@ const Calendar: React.FC<CalendarProps> = (props) => {
       onLayout={(event) => {
         const itemHeight = event.nativeEvent.layout.height / 11;
         const roundedUpHeight = Math.ceil(itemHeight / 10) * 10;
-        scrollViewRef.current?.scrollTo({
-          animated: false,
-          y: roundedUpHeight * (startHour - 0.75),
-        });
         setHourHeight(roundedUpHeight);
       }}
       ref={scrollViewRef}

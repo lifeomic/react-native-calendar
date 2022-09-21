@@ -75,14 +75,20 @@ export const DayList: React.FC<DayListProps> = (props) => {
                 {
                   height: (difference / 15) * (hourHeight / 4),
                   /**
-                   * startHour + 1 * hourHeight = the beginning of the hour location for the event start
+                   * startHour * (hourHeight + 1)
+                   * each hour has a fixed height and each Separator has a height
+                   * of 1 which adds up based on the start time hour add together
+                   * to get the start location of the hour mark
                    *
                    * startMinute / 15 => :00 = 0, :15 = 1, :30 = 2, :45 = 3
                    * hourHeight / 4 => size of the 15 minute interval segments
-                   * combine them together to get the start position of the event within the hour based on minutes
+                   * combine them together to get the start position of the event
+                   * within the hour based on minutes
+                   *
+                   * add all of these together to get the event start position
                    */
                   top:
-                    (startHour + 1) * hourHeight +
+                    startHour * (hourHeight + 1) +
                     (startMinute / 15) * (hourHeight / 4),
                 },
               ]}
