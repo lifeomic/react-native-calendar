@@ -1,5 +1,11 @@
-import React from 'react';
-import { GestureResponderEvent, ScrollView, View } from 'react-native';
+import React, { useEffect } from 'react';
+import {
+  GestureResponderEvent,
+  ScrollView,
+  StyleProp,
+  View,
+  ViewStyle,
+} from 'react-native';
 
 import { DayList } from './DayList';
 import { Times } from './Times';
@@ -64,6 +70,12 @@ export type CalendarProps = {
    */
   startHour?: number;
   /**
+   * Style Prop for the Calendar ScrollView. If the Calendar does not have a
+   * parent container with a fixed height, use this prop to ensure that the
+   * Calendar does not inflate outside of the useable view
+   */
+  style?: StyleProp<ViewStyle>;
+  /**
    * Time slots to mark as "disabled".
    */
   unavailableTimeSlots?: TimeSlot[];
@@ -77,6 +89,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
     onGridPress,
     startDate,
     startHour = 8,
+    style,
     unavailableTimeSlots,
   } = props;
   const scrollViewRef = React.useRef<ScrollView>(null);
@@ -91,6 +104,25 @@ const Calendar: React.FC<CalendarProps> = (props) => {
 
   const styles = useCalendarStyles();
 
+  /**
+   * it's important that the scrollView scrollTo is called after the initial
+   * rendering of ScrollView instead of within the onLayout as the inner
+   * components will not be drawn and inflated at that time. So even tho the
+   * values we need will be present at that time, the scrollTo will be
+   * called and have no where to scroll so the scrollTo will result in the
+   * view staying at the top of the ScrollView
+   */
+  useEffect(() => {
+    scrollViewRef.current?.scrollTo({
+      animated: false,
+      /**
+       * size of hours before start hour + fontSize + startHour
+       * for all the { height: 1 } separators
+       */
+      y: hourHeight * (startHour - 1) + 10 + startHour,
+    });
+  }, [hourHeight, startHour]);
+
   return (
     <ScrollView
       bounces={false}
@@ -98,15 +130,11 @@ const Calendar: React.FC<CalendarProps> = (props) => {
       onLayout={(event) => {
         const itemHeight = event.nativeEvent.layout.height / 11;
         const roundedUpHeight = Math.ceil(itemHeight / 10) * 10;
-        scrollViewRef.current?.scrollTo({
-          animated: false,
-          y: roundedUpHeight * (startHour - 0.75),
-        });
         setHourHeight(roundedUpHeight);
       }}
       ref={scrollViewRef}
       showsVerticalScrollIndicator={false}
-      style={styles.flex}
+      style={style}
       testID="calendar"
     >
       <Times hourHeight={hourHeight} />

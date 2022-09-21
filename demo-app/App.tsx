@@ -1,7 +1,19 @@
-import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, Platform, StyleSheet } from 'react-native';
+import {
+  SafeAreaProvider,
+  initialWindowMetrics,
+  useSafeAreaFrame,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 import dayjs from 'dayjs';
-import { Calendar } from '../src/Calendar';
+
+import { Calendar, CalendarEvent } from '../src/Calendar';
+
+const showAlert = Platform.select({
+  default: Alert.alert,
+  web: alert,
+});
 
 const unavailableTimeSlots = [
   {
@@ -28,8 +40,15 @@ const unavailableTimeSlots = [
 
 const startDate = new Date(2022, 8, 7);
 
+const onEventPress = (event: CalendarEvent) => {
+  showAlert(`You pressed event with id: ${event.id}`);
+};
+
 const InteractiveCalendar = () => {
-  const [moreEvents, setEvents] = useState<any[]>([
+  const { height } = useSafeAreaFrame();
+  const { top, bottom } = useSafeAreaInsets();
+
+  const [moreEvents, setEvents] = useState<CalendarEvent[]>([
     {
       id: 'id-1',
       startDate: new Date(2022, 8, 7, 13, 0),
@@ -47,40 +66,41 @@ const InteractiveCalendar = () => {
   return (
     <Calendar
       events={moreEvents}
-      onGridPress={(e, date) => {
+      onGridPress={(_event, date) => {
         setEvents((events) => [
           ...events,
           {
             id: `id-${events.length + 1}`,
             startDate: date,
-            endDate: dayjs(date).add(30, 'minutes'),
+            endDate: dayjs(date).add(30, 'minutes').toDate(),
             title: `Event ${events.length + 1}`,
           },
         ]);
       }}
-      onEventPress={(e) => {
-        alert(`You pressed event with id: ${e.id}`);
-      }}
+      onEventPress={onEventPress}
       numDays={1}
       startDate={startDate}
+      style={[
+        styles.container,
+        { height, marginTop: top, marginBottom: bottom },
+      ]}
       unavailableTimeSlots={unavailableTimeSlots}
     />
   );
 };
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
+    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <InteractiveCalendar />
-    </View>
+    </SafeAreaProvider>
   );
-}
+};
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
