@@ -41,7 +41,7 @@ export const TimeSlot: React.FC<TimeSlotProps> = (props) => {
         time.disabled ? styles.disabled : styles.enabled,
         { height: time.height },
       ]}
-      testID="time slot"
+      testID={time.time === 'Noon' ? '12:00 PM' : time.time}
     />
   );
 };

@@ -14,9 +14,9 @@ describe('TimeSlot', () => {
   it('renders TimeSlot without onGridPress', () => {
     const view = render(<TimeSlot time={{ ...baseTime, time: '11:45 AM' }} />);
 
-    expect(view.queryByTestId('time slot')).toBeTruthy();
+    expect(view.queryByTestId('11:45 AM')).toBeTruthy();
 
-    expect(view.getByTestId('time slot')).not.toBeDisabled();
+    expect(view.getByTestId('11:45 AM')).not.toBeDisabled();
   });
 
   it('renders TimeSlot with onGridPress but disabled', () => {
@@ -28,10 +28,10 @@ describe('TimeSlot', () => {
       />
     );
 
-    expect(view.queryByTestId('time slot')).toBeTruthy();
-    expect(view.getByTestId('time slot')).toBeDisabled();
+    expect(view.queryByTestId('11:45 AM')).toBeTruthy();
+    expect(view.getByTestId('11:45 AM')).toBeDisabled();
 
-    fireEvent.press(view.getByTestId('time slot'));
+    fireEvent.press(view.getByTestId('11:45 AM'));
 
     expect(onGridPressMock).not.toHaveBeenCalled();
   });
@@ -45,9 +45,9 @@ describe('TimeSlot', () => {
       />
     );
 
-    expect(view.queryByTestId('time slot')).toBeTruthy();
+    expect(view.queryByTestId('11:45 AM')).toBeTruthy();
 
-    fireEvent.press(view.getByTestId('time slot'));
+    fireEvent.press(view.getByTestId('11:45 AM'));
 
     expect(onGridPressMock).toHaveBeenCalledWith(
       undefined,
@@ -64,9 +64,9 @@ describe('TimeSlot', () => {
       />
     );
 
-    expect(view.queryByTestId('time slot')).toBeTruthy();
+    expect(view.queryByTestId('12:00 PM')).toBeTruthy();
 
-    fireEvent.press(view.getByTestId('time slot'));
+    fireEvent.press(view.getByTestId('12:00 PM'));
 
     expect(onGridPressMock).toHaveBeenCalledWith(
       undefined,
@@ -83,9 +83,9 @@ describe('TimeSlot', () => {
       />
     );
 
-    expect(view.queryByTestId('time slot')).toBeTruthy();
+    expect(view.queryByTestId('3:15 PM')).toBeTruthy();
 
-    fireEvent.press(view.getByTestId('time slot'));
+    fireEvent.press(view.getByTestId('3:15 PM'));
 
     expect(onGridPressMock).toHaveBeenCalledWith(
       undefined,
