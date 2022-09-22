@@ -55,7 +55,9 @@ export const DayList: React.FC<DayListProps> = (props) => {
             <TimeSlot onGridPress={onGridPress} time={time} />
             {index === 0 ||
             index === times.length - 1 ||
-            !time.time.includes(`:${60 - minutesStep}`) ? null : (
+            !time.time.includes(
+              `:${minutesStep > 50 ? '0' : ''}${60 - minutesStep}`
+            ) ? null : (
               <Separator />
             )}
           </View>
