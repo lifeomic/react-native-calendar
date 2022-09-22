@@ -18,6 +18,8 @@ import {
 } from './styles';
 import { CalendarRenderersProps, CalendarRenderersProvider } from './rendering';
 
+const DEFAULT_MINUTES_STEP = 5;
+
 export type TimeSlot = {
   startDate: Date;
   endDate: Date;
@@ -39,6 +41,16 @@ export type CalendarProps = {
    * The list of events to render on the calendar.
    */
   events: CalendarEvent[];
+  /**
+   * Number of minutes per clickable time slot interval
+   *
+   * Example:
+   * 5 = 5 minutes per step so 12 intervals within an hour
+   * 15 = 15 minutes per step so 5 intervals within an hour
+   *
+   * default: 5
+   */
+  minutesStep?: number;
   /**
    * 1 = Day view
    * 7 = Week view TODO: the Calendar UI is not designed optimally yet for week usage
@@ -88,6 +100,7 @@ export type CalendarProps = {
 const Calendar: React.FC<CalendarProps> = (props) => {
   const {
     events,
+    minutesStep = DEFAULT_MINUTES_STEP,
     numDays,
     onEventPress,
     onGridPress,
@@ -144,6 +157,11 @@ const Calendar: React.FC<CalendarProps> = (props) => {
             events={data.events}
             hourHeight={hourHeight}
             key={data.date.valueOf()}
+            minutesStep={
+              minutesStep < DEFAULT_MINUTES_STEP
+                ? DEFAULT_MINUTES_STEP
+                : minutesStep
+            }
             onEventPress={onEventPress}
             onGridPress={onGridPress}
             unavailableTimeSlots={data.unavailableTimeSlots}

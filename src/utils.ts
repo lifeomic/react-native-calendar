@@ -61,18 +61,10 @@ export const useEventData = (data: UseEventData) => {
   return eventData;
 };
 
-export type UseTimesList = {
+export type UseTimesList = Required<Pick<CalendarProps, 'minutesStep'>> & {
   date?: dayjs.Dayjs;
   formatTimeLabel: string;
   height: number;
-  /**
-   * we support 15 minute intervals within the calendar as
-   * events can start/end on intervals :00 :15 :30 :45
-   *
-   * we support 60 minute intervals to show on the left side
-   * of the calendar for daily time labels
-   */
-  minutesStep: 15 | 60;
   unavailableTimeSlots?: TimeSlot[];
 };
 

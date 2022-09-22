@@ -10,29 +10,36 @@ import { useTimesList } from './utils';
 import { useCalendarStyles } from './styles';
 import { useCalendarRenderers } from './rendering';
 
+const getStepsInHour = (minutesStep: number) => 60 / minutesStep;
+
 type DayListProps = Pick<
   CalendarProps,
   'events' | 'onEventPress' | 'onGridPress' | 'unavailableTimeSlots'
-> & {
-  date: dayjs.Dayjs;
-  hourHeight: number;
-};
+> &
+  Required<Pick<CalendarProps, 'minutesStep'>> & {
+    date: dayjs.Dayjs;
+    hourHeight: number;
+  };
 
 export const DayList: React.FC<DayListProps> = (props) => {
   const {
     events,
     date,
     hourHeight,
+    minutesStep,
     onEventPress,
     onGridPress,
     unavailableTimeSlots,
   } = props;
+
+  const stepsInHours = getStepsInHour(minutesStep);
+
   const styles = useCalendarStyles();
   const times = useTimesList({
     date,
     formatTimeLabel: 'h:mm A',
-    height: hourHeight / 4,
-    minutesStep: 15,
+    height: hourHeight / stepsInHours,
+    minutesStep,
     unavailableTimeSlots,
   });
 
@@ -48,7 +55,7 @@ export const DayList: React.FC<DayListProps> = (props) => {
             <TimeSlot onGridPress={onGridPress} time={time} />
             {index === 0 ||
             index === times.length - 1 ||
-            !time.time.includes(':45') ? null : (
+            !time.time.includes(`:${60 - minutesStep}`) ? null : (
               <Separator />
             )}
           </View>
@@ -70,7 +77,8 @@ export const DayList: React.FC<DayListProps> = (props) => {
               style={[
                 styles.event,
                 {
-                  height: (difference / 15) * (hourHeight / 4),
+                  height:
+                    (difference / minutesStep) * (hourHeight / stepsInHours),
                   /**
                    * startHour * (hourHeight + 1)
                    * each hour has a fixed height and each Separator has a height
@@ -86,7 +94,7 @@ export const DayList: React.FC<DayListProps> = (props) => {
                    */
                   top:
                     startHour * (hourHeight + 1) +
-                    (startMinute / 15) * (hourHeight / 4),
+                    (startMinute / minutesStep) * (hourHeight / stepsInHours),
                 },
                 event.color ? { backgroundColor: event.color } : undefined,
               ]}
