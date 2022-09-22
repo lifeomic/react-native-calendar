@@ -10,36 +10,33 @@ import { useTimesList } from './utils';
 import { useCalendarStyles } from './styles';
 import { useCalendarRenderers } from './rendering';
 
-const getStepsInHour = (minutesStep: number) => 60 / minutesStep;
+const DEFAULT_MINUTES_STEP = 5;
+const STEPS_IN_HOUR = 60 / DEFAULT_MINUTES_STEP;
 
 type DayListProps = Pick<
   CalendarProps,
   'events' | 'onEventPress' | 'onGridPress' | 'unavailableTimeSlots'
-> &
-  Required<Pick<CalendarProps, 'minutesStep'>> & {
-    date: dayjs.Dayjs;
-    hourHeight: number;
-  };
+> & {
+  date: dayjs.Dayjs;
+  hourHeight: number;
+};
 
 export const DayList: React.FC<DayListProps> = (props) => {
   const {
     events,
     date,
     hourHeight,
-    minutesStep,
     onEventPress,
     onGridPress,
     unavailableTimeSlots,
   } = props;
 
-  const stepsInHours = getStepsInHour(minutesStep);
-
   const styles = useCalendarStyles();
   const times = useTimesList({
     date,
     formatTimeLabel: 'h:mm A',
-    height: hourHeight / stepsInHours,
-    minutesStep,
+    height: hourHeight / STEPS_IN_HOUR,
+    minutesStep: DEFAULT_MINUTES_STEP,
     unavailableTimeSlots,
   });
 
@@ -55,10 +52,7 @@ export const DayList: React.FC<DayListProps> = (props) => {
             <TimeSlot onGridPress={onGridPress} time={time} />
             {index === 0 ||
             index === times.length - 1 ||
-            !time.time.includes(
-              // if the minutesStep is > 50 we'll get :09 -> :00
-              `:${minutesStep > 50 ? '0' : ''}${60 - minutesStep}`
-            ) ? null : (
+            !time.time.includes(':55') ? null : (
               <Separator />
             )}
           </View>
@@ -81,14 +75,15 @@ export const DayList: React.FC<DayListProps> = (props) => {
                 styles.event,
                 {
                   height:
-                    (difference / minutesStep) * (hourHeight / stepsInHours),
+                    (difference / DEFAULT_MINUTES_STEP) *
+                    (hourHeight / STEPS_IN_HOUR),
                   /**
                    * startHour * (hourHeight + 1)
                    * each hour has a fixed height and each Separator has a height
                    * of 1 which adds up based on the start time hour. add together
                    * to get the start location of the hour mark
                    *
-                   * startMinute / 15 => :00 = 0, :15 = 1, :30 = 2, :45 = 3
+                   * startMinute / 5 => :00 = 0, :05 = 1, :10 = 2, ... :55 = 11
                    * hourHeight / 4 => size of the 15 minute interval segments
                    * combine them together to get the start position of the event
                    * within the hour based on minutes
@@ -97,7 +92,8 @@ export const DayList: React.FC<DayListProps> = (props) => {
                    */
                   top:
                     startHour * (hourHeight + 1) +
-                    (startMinute / minutesStep) * (hourHeight / stepsInHours),
+                    (startMinute / DEFAULT_MINUTES_STEP) *
+                      (hourHeight / STEPS_IN_HOUR),
                 },
                 event.color ? { backgroundColor: event.color } : undefined,
               ]}

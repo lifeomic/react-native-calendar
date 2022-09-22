@@ -42,7 +42,7 @@ describe('Calendar', () => {
     expect(onEventPressMock).toHaveBeenCalledWith(eventData[0]);
   });
 
-  it('renders hours with correct height for default minutesStep', () => {
+  it('renders hours with correct height', () => {
     const hourHeight = 123;
     const screen = render(
       <Calendar
@@ -55,57 +55,6 @@ describe('Calendar', () => {
 
     expect(screen.getByTestId('8:00 AM')).toHaveStyle({
       height: hourHeight / 12,
-    });
-  });
-
-  it('renders hours with correct height for custom minutesStep that is too low', () => {
-    const hourHeight = 123;
-    const screen = render(
-      <Calendar
-        numDays={1}
-        startDate={startDate}
-        events={[]}
-        hourHeight={hourHeight}
-        minutesStep={4}
-      />
-    );
-
-    expect(screen.getByTestId('8:00 AM')).toHaveStyle({
-      height: hourHeight / 12,
-    });
-  });
-
-  it('renders hours with correct height for custom minutesStep that is too high', () => {
-    const hourHeight = 123;
-    const screen = render(
-      <Calendar
-        numDays={1}
-        startDate={startDate}
-        events={[]}
-        hourHeight={hourHeight}
-        minutesStep={61}
-      />
-    );
-
-    expect(screen.getByTestId('8:00 AM')).toHaveStyle({
-      height: hourHeight,
-    });
-  });
-
-  it('renders hours with correct height for custom minutesStep', () => {
-    const hourHeight = 123;
-    const screen = render(
-      <Calendar
-        numDays={1}
-        startDate={startDate}
-        events={[]}
-        hourHeight={hourHeight}
-        minutesStep={15}
-      />
-    );
-
-    expect(screen.getByTestId('8:00 AM')).toHaveStyle({
-      height: hourHeight / 4,
     });
   });
 

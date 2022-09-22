@@ -61,10 +61,14 @@ export const useEventData = (data: UseEventData) => {
   return eventData;
 };
 
-export type UseTimesList = Required<Pick<CalendarProps, 'minutesStep'>> & {
+export type UseTimesList = {
   date?: dayjs.Dayjs;
   formatTimeLabel: string;
   height: number;
+  /**
+   * we only support 5 minute intervals
+   */
+  minutesStep: number;
   unavailableTimeSlots?: TimeSlot[];
 };
 
