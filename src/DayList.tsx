@@ -56,6 +56,7 @@ export const DayList: React.FC<DayListProps> = (props) => {
             {index === 0 ||
             index === times.length - 1 ||
             !time.time.includes(
+              // if the minutesStep is > 50 we'll get :09 -> :00
               `:${minutesStep > 50 ? '0' : ''}${60 - minutesStep}`
             ) ? null : (
               <Separator />
