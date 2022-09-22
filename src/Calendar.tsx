@@ -19,6 +19,7 @@ import {
 import { CalendarRenderersProps, CalendarRenderersProvider } from './rendering';
 
 const DEFAULT_MINUTES_STEP = 5;
+const MAX_MINUTES_STEP = 60;
 
 export type TimeSlot = {
   startDate: Date;
@@ -48,6 +49,8 @@ export type CalendarProps = {
    * 5 = 5 minutes per step so 12 intervals within an hour
    * 15 = 15 minutes per step so 5 intervals within an hour
    *
+   * minimum: 5
+   * maximum: 60
    * default: 5
    */
   minutesStep?: number;
@@ -160,6 +163,8 @@ const Calendar: React.FC<CalendarProps> = (props) => {
             minutesStep={
               minutesStep < DEFAULT_MINUTES_STEP
                 ? DEFAULT_MINUTES_STEP
+                : minutesStep > MAX_MINUTES_STEP
+                ? MAX_MINUTES_STEP
                 : minutesStep
             }
             onEventPress={onEventPress}

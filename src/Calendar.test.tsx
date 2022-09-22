@@ -75,6 +75,23 @@ describe('Calendar', () => {
     });
   });
 
+  it('renders hours with correct height for custom minutesStep that is too high', () => {
+    const hourHeight = 123;
+    const screen = render(
+      <Calendar
+        numDays={1}
+        startDate={startDate}
+        events={[]}
+        hourHeight={hourHeight}
+        minutesStep={61}
+      />
+    );
+
+    expect(screen.getByTestId('8:00 AM')).toHaveStyle({
+      height: hourHeight,
+    });
+  });
+
   it('renders hours with correct height for custom minutesStep', () => {
     const hourHeight = 123;
     const screen = render(
