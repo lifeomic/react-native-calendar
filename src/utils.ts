@@ -66,13 +66,13 @@ export type UseTimesList = {
   formatTimeLabel: string;
   height: number;
   /**
-   * we support 15 minute intervals within the calendar as
-   * events can start/end on intervals :00 :15 :30 :45
+   * we support 5 minute intervals within the calendar as
+   * events can start/end on intervals :00 :05 :10 ... :55
    *
    * we support 60 minute intervals to show on the left side
    * of the calendar for daily time labels
    */
-  minutesStep: 15 | 60;
+  minutesStep: 5 | 60;
   unavailableTimeSlots?: TimeSlot[];
 };
 

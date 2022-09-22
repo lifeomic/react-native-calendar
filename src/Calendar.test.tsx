@@ -54,7 +54,7 @@ describe('Calendar', () => {
     );
 
     expect(screen.getByTestId('8:00 AM')).toHaveStyle({
-      height: hourHeight / 4,
+      height: hourHeight / 12,
     });
   });
 
