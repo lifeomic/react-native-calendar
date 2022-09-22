@@ -84,9 +84,9 @@ export const DayList: React.FC<DayListProps> = (props) => {
                    * to get the start location of the hour mark
                    *
                    * startMinute / 5 => :00 = 0, :05 = 1, :10 = 2, ... :55 = 11
-                   * hourHeight / 4 => size of the 15 minute interval segments
-                   * combine them together to get the start position of the event
-                   * within the hour based on minutes
+                   * hourHeight / STEPS_IN_HOUR => size of the 5 minute interval
+                   * segments combine them together to get the start position of the
+                   * event within the hour based on minutes
                    *
                    * add all of these together to get the event start position
                    */
