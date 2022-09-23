@@ -94,6 +94,7 @@ export const useCalendarStyles = () => {
           backgroundColor: colors.event,
           position: 'absolute',
           width: '100%',
+          overflow: 'hidden',
         },
         separator: {
           backgroundColor: colors.separator,

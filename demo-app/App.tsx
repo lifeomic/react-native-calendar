@@ -61,6 +61,12 @@ const InteractiveCalendar = () => {
       endDate: new Date(2022, 8, 7, 13, 0),
       title: 'Event 2',
     },
+    {
+      id: 'id-3',
+      startDate: new Date(2022, 8, 7, 14, 30),
+      endDate: new Date(2022, 8, 7, 14, 45),
+      title: 'Event 3',
+    },
   ]);
 
   return (
