@@ -40,11 +40,6 @@ export type CalendarProps = {
    */
   events: CalendarEvent[];
   /**
-   * 1 = Day view
-   * 7 = Week view TODO: the Calendar UI is not designed optimally yet for week usage
-   */
-  numDays: 1 | 7;
-  /**
    * Called when an event is pressed.
    */
   onEventPress?: (event: CalendarEvent) => void;
@@ -58,9 +53,7 @@ export type CalendarProps = {
   /**
    * The start date from which to begin the calendar.
    *
-   * In multi-day mode, this specifies the week that will be displayed.
-   *
-   * In single-day mode, this specifies the day that will be shown.
+   * This specifies the day that will be shown.
    */
   startDate: Date;
   /**
@@ -88,7 +81,6 @@ export type CalendarProps = {
 const Calendar: React.FC<CalendarProps> = (props) => {
   const {
     events,
-    numDays,
     onEventPress,
     onGridPress,
     startDate,
@@ -101,7 +93,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
 
   const eventData = useEventData({
     events,
-    numDays,
+    numDays: 1,
     startDate,
     unavailableTimeSlots,
   });

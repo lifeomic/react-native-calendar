@@ -13,8 +13,10 @@ const MINUTES_IN_DAY = 60 * 24;
 
 export type UseEventData = Pick<
   CalendarProps,
-  'events' | 'numDays' | 'startDate' | 'unavailableTimeSlots'
->;
+  'events' | 'startDate' | 'unavailableTimeSlots'
+> & {
+  numDays: number;
+};
 
 /**
  * split up event and unavailableTimeSlots data into an array
