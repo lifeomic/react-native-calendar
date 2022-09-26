@@ -28,7 +28,6 @@ describe('Calendar', () => {
     const view = render(
       <Calendar
         events={eventData}
-        numDays={1}
         onEventPress={onEventPressMock}
         startDate={startDate}
         unavailableTimeSlots={unavailableTimeSlots}
@@ -45,12 +44,7 @@ describe('Calendar', () => {
   it('renders hours with correct height', () => {
     const hourHeight = 123;
     const screen = render(
-      <Calendar
-        numDays={1}
-        startDate={startDate}
-        events={[]}
-        hourHeight={hourHeight}
-      />
+      <Calendar startDate={startDate} events={[]} hourHeight={hourHeight} />
     );
 
     expect(screen.getByTestId('8:00 AM')).toHaveStyle({
@@ -61,7 +55,6 @@ describe('Calendar', () => {
   it('renders event.color correctly', () => {
     const screen = render(
       <Calendar
-        numDays={1}
         startDate={startDate}
         events={[
           {
