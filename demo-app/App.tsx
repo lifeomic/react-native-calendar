@@ -15,30 +15,30 @@ const showAlert = Platform.select({
   web: alert,
 });
 
+const startDate = dayjs('2022-09-07');
+
 const unavailableTimeSlots = [
   {
-    startDate: new Date('2022-09-07T00:00:00'),
-    endDate: new Date('2022-09-07T07:00:00'),
+    startDate: startDate,
+    endDate: startDate.set('h', 7),
   },
   {
-    startDate: new Date('2022-09-07T09:30:00'),
-    endDate: new Date('2022-09-07T10:15:00'),
+    startDate: startDate.set('h', 9).set('minutes', 30),
+    endDate: startDate.set('h', 10).set('minutes', 30),
   },
   {
-    startDate: new Date('2022-09-07T11:00:00'),
-    endDate: new Date('2022-09-07T12:00:00'),
+    startDate: startDate.set('h', 11),
+    endDate: startDate.set('h', 12),
   },
   {
-    startDate: new Date('2022-09-07T14:00:00'),
-    endDate: new Date('2022-09-07T17:00:00'),
+    startDate: startDate.set('h', 14),
+    endDate: startDate.set('h', 17),
   },
   {
-    startDate: new Date('2022-09-07T22:00:00'),
-    endDate: new Date('2022-09-07T23:59:00'),
+    startDate: startDate.set('h', 22),
+    endDate: startDate.set('h', 24),
   },
 ];
-
-const startDate = new Date(2022, 8, 7);
 
 const onEventPress = (event: CalendarEvent) => {
   showAlert(`You pressed event with id: ${event.id}`);
@@ -51,20 +51,20 @@ const InteractiveCalendar = () => {
   const [moreEvents, setEvents] = useState<CalendarEvent[]>([
     {
       id: 'id-1',
-      startDate: new Date(2022, 8, 7, 13, 0),
-      endDate: new Date(2022, 8, 7, 13, 30),
+      startDate: startDate.set('h', 8).toDate(),
+      endDate: startDate.set('h', 8).set('minutes', 45).toDate(),
       title: 'Event 1',
     },
     {
       id: 'id-2',
-      startDate: new Date(2022, 8, 7, 12, 30),
-      endDate: new Date(2022, 8, 7, 13, 0),
+      startDate: startDate.set('h', 14).toDate(),
+      endDate: startDate.set('h', 14).set('minutes', 45).toDate(),
       title: 'Event 2',
     },
     {
       id: 'id-3',
-      startDate: new Date(2022, 8, 7, 14, 30),
-      endDate: new Date(2022, 8, 7, 14, 45),
+      startDate: startDate.set('h', 16).set('minutes', 30).toDate(),
+      endDate: startDate.set('h', 17).set('minutes', 45).toDate(),
       title: 'Event 3',
     },
   ]);
@@ -78,19 +78,21 @@ const InteractiveCalendar = () => {
           {
             id: `id-${events.length + 1}`,
             startDate: date,
-            endDate: dayjs(date).add(30, 'minutes').toDate(),
+            endDate: dayjs(date).add(45, 'minutes').toDate(),
             title: `Event ${events.length + 1}`,
           },
         ]);
       }}
       onEventPress={onEventPress}
-      numDays={1}
-      startDate={startDate}
+      startDate={startDate.toDate()}
       style={[
         styles.container,
         { height, marginTop: top, marginBottom: bottom },
       ]}
-      unavailableTimeSlots={unavailableTimeSlots}
+      unavailableTimeSlots={unavailableTimeSlots.map((slot) => ({
+        startDate: slot.startDate.toDate(),
+        endDate: slot.endDate.toDate(),
+      }))}
     />
   );
 };
