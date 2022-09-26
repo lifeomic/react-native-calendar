@@ -14,17 +14,19 @@ See the in-line JSDoc for documentation on specific props.
 import { Calendar } from '@lifeomic/react-native-calendar';
 
 const App = () => {
-  const [events, setEvents] = React.useState([])
+  const [events, setEvents] = React.useState([
+    {
+      id: 'event-one',
+      title: 'Event One',
+      startDate: new Date(),
+      endDate: new Date(),
+    },
+  ]);
 
   return (
     <Calendar
       startDate={new Date()}
-      events={[
-        id: 'event-one',
-        title: 'Event One',
-        startDate: new Date(),
-        endDate: new Date(),
-      ]}
+      events={events}
       onGridPress={(e, date) => {
         setEvents([
           ...events,
@@ -33,11 +35,11 @@ const App = () => {
             title: 'New Event',
             startDate: date,
             endDate: new Date(),
-          }
-        ])
+          },
+        ]);
       }}
       onEventPress={(event) => {
-        alert('Pressed event: ' + event.title)
+        alert('Pressed event: ' + event.title);
       }}
     />
   );
