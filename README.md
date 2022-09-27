@@ -1,6 +1,6 @@
 Customizable cross-platform React Native components for rendering calendars. Works out-of-the-box on iOS, Android, and Web.
 
-![example](./example.gif)
+![example](example.gif)
 
 ## Usage
 
